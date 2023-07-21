@@ -11,6 +11,10 @@ public class CarroService {
     @Autowired
     private CarroRepository rep;
     public List<Carro> getCarros() {
-        return null;
+        return rep.findAll();
+    }
+
+    public Carro save(Carro carro) {
+        return rep.save(carro);
     }
 }
