@@ -2,8 +2,10 @@ package com.api.Cars.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarroService {
@@ -18,7 +20,20 @@ public class CarroService {
         return rep.save(carro);
     }
 
-    public Carro delete(Carro carro) {
-        return rep.delete(carro);
+    public Carro update(Carro carro, Long id) {
+        Assert.notNull(id, "Nao foi possivel att");
+
+        Optional<Carro> op = rep.findById(id);
+        if(op.isPresent()){
+            Carro db = op.get();
+            db.setNome(carro.getNome());
+            db.setTipo(carro.getTipo());
+            return rep.save(db);
+        } else
+            throw new RuntimeException("Nao foi possivel autlaizar");
+    }
+
+    public void delete(Carro carro) {
+        //return rep.delete(carro);
     }
 }

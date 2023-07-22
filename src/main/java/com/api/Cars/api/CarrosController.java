@@ -22,15 +22,15 @@ public class CarrosController {
         return "carro add com sucesso: "+c.getNome()+" - "+c.getTipo();
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public String putCarro(@PathVariable("id") Long id, @RequestBody Carro carro){
-        Carro c = service.update(carro);
+        Carro c = service.update(carro, id);
         return "carro atualizado com sucesso: "+c.getId()+" - "+c.getNome();
     }
 
     @DeleteMapping
-    public String deleteCarro(@RequestParam Carro carro){
-        Carro c = service.delete(carro);
-        return "carro deletado com sucesso: "+c.getNome()+" - "+c.getTipo();
+    public void deleteCarro(@RequestParam Carro carro){
+        //Carro c = service.delete(carro, id);
+        //return "carro deletado com sucesso: "+c.getNome()+" - "+c.getTipo();
     }
 }
