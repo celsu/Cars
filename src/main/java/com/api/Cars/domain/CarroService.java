@@ -17,4 +17,8 @@ public class CarroService {
     public Carro save(Carro carro) {
         return rep.save(carro);
     }
+
+    public Carro delete(Carro carro) {
+        return rep.delete(carro);
+    }
 }

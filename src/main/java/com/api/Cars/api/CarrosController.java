@@ -17,8 +17,20 @@ public class CarrosController {
         return service.getCarros();
     }
     @PostMapping
-    public String postCarros(@RequestBody Carro carro){
+    public String postCarro(@RequestBody Carro carro){
         Carro c = service.save(carro);
-        return "carro com sucesso: "+c.getNome()+" - "+c.getTipo();
+        return "carro add com sucesso: "+c.getNome()+" - "+c.getTipo();
+    }
+
+    @PutMapping
+    public String putCarro(@PathVariable("id") Long id, @RequestBody Carro carro){
+        Carro c = service.update(carro);
+        return "carro atualizado com sucesso: "+c.getId()+" - "+c.getNome();
+    }
+
+    @DeleteMapping
+    public String deleteCarro(@RequestParam Carro carro){
+        Carro c = service.delete(carro);
+        return "carro deletado com sucesso: "+c.getNome()+" - "+c.getTipo();
     }
 }
