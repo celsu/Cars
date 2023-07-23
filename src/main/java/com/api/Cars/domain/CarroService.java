@@ -19,7 +19,9 @@ public class CarroService {
     public  Optional<Carro> getCarrosById(Long id) {
         Optional<Carro> op = rep.findById(id);
         return op;
-
+    }
+    public Iterable<Carro> getCarrosByTipo(String tipo) {
+        return rep.findByTipo(tipo);
     }
 
     public Carro save(Carro carro) {

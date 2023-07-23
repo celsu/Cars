@@ -22,7 +22,14 @@ public class CarrosController {
     @GetMapping("/{id}")
     public ResponseEntity getCarros(@PathVariable("id") Long id){
         Optional<Carro> ca = service.getCarrosById(id);
-        return ca.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return ca
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/tipo/{tipo}")
+    public ResponseEntity< Iterable<Carro>> getCarros(@PathVariable("tipo") String tipo){
+        return ResponseEntity.ok(service.getCarrosByTipo(tipo));
     }
 
     @PostMapping
