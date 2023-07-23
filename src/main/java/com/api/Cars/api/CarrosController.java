@@ -28,9 +28,9 @@ public class CarrosController {
         return "carro atualizado com sucesso: "+c.getId()+" - "+c.getNome();
     }
 
-    @DeleteMapping
-    public void deleteCarro(@RequestParam Carro carro){
-        //Carro c = service.delete(carro, id);
-        //return "carro deletado com sucesso: "+c.getNome()+" - "+c.getTipo();
+    @DeleteMapping("/{id}")
+    public String deleteCarro(@PathVariable("id") Long id){
+         service.delete(id);
+        return "carro deletado com sucesso";
     }
 }

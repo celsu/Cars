@@ -33,7 +33,10 @@ public class CarroService {
             throw new RuntimeException("Nao foi possivel autlaizar");
     }
 
-    public void delete(Carro carro) {
-        //return rep.delete(carro);
+    public void delete(Long id) {
+        Optional<Carro> op = rep.findById(id);
+        if(op.isPresent()){
+        rep.deleteById(id);
+        }
     }
 }
