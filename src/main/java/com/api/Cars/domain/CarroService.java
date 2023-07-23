@@ -20,7 +20,7 @@ public class CarroService {
         Optional<Carro> op = rep.findById(id);
         return op;
     }
-    public Iterable<Carro> getCarrosByTipo(String tipo) {
+    public List<Carro> getCarrosByTipo(String tipo) {
         return rep.findByTipo(tipo);
     }
 

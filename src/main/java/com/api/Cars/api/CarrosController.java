@@ -28,8 +28,13 @@ public class CarrosController {
     }
 
     @GetMapping("/tipo/{tipo}")
-    public ResponseEntity< Iterable<Carro>> getCarros(@PathVariable("tipo") String tipo){
-        return ResponseEntity.ok(service.getCarrosByTipo(tipo));
+    public ResponseEntity< List<Carro>> getCarros(@PathVariable("tipo") String tipo){
+        //return ResponseEntity.ok(service.getCarrosByTipo(tipo));
+        List<Carro> ca = service.getCarrosByTipo(tipo);
+        if(ca.isEmpty())
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.ok(service.getCarrosByTipo(tipo));
     }
 
     @PostMapping
