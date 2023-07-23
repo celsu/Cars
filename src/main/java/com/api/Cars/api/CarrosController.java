@@ -3,9 +3,11 @@ package com.api.Cars.api;
 import com.api.Cars.domain.Carro;
 import com.api.Cars.domain.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/carros")
@@ -13,9 +15,16 @@ public class CarrosController {
     @Autowired
     private CarroService service;
     @GetMapping()
-    public List<Carro>getCarros(){
-        return service.getCarros();
+    public ResponseEntity<List<Carro>>getCarros(){
+        return ResponseEntity.ok(service.getCarros());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getCarros(@PathVariable("id") Long id){
+        Optional<Carro> ca = service.getCarrosById(id);
+        return ca.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public String postCarro(@RequestBody Carro carro){
         Carro c = service.save(carro);

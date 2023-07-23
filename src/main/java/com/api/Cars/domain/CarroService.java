@@ -16,6 +16,12 @@ public class CarroService {
         return rep.findAll();
     }
 
+    public  Optional<Carro> getCarrosById(Long id) {
+        Optional<Carro> op = rep.findById(id);
+        return op;
+
+    }
+
     public Carro save(Carro carro) {
         return rep.save(carro);
     }
