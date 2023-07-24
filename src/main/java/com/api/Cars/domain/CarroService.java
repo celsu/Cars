@@ -15,19 +15,21 @@ public class CarroService {
     private CarroRepository rep;
     public List<CarroDTO> getCarros() {
         //Recupera a Lista de carros, e criar carrosDTO, convertendo a lista para DTO
-        return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
+        return rep.findAll().stream().map(CarroDTO::create).collect(Collectors.toList());
     }
 
-    public  Optional<Carro> getCarrosById(Long id) {
-        Optional<Carro> op = rep.findById(id);
-        return op;
+    public  Optional<CarroDTO> getCarrosById(Long id) {
+        //new cria o objeto no contrutor padrao
+        //return rep.findById(id).map(CarroDTO::new);
+        //create usa o ModelMapper para crear o DTO
+        return rep.findById(id).map(CarroDTO::create);
     }
     public List<CarroDTO> getCarrosByTipo(String tipo) {
-        return rep.findByTipo(tipo).stream().map(CarroDTO::new).collect(Collectors.toList());
+        return rep.findByTipo(tipo).stream().map(CarroDTO::create).collect(Collectors.toList());
     }
 
-    public Carro save(Carro carro) {
-        return rep.save(carro);
+    public CarroDTO save(Carro carro) {
+        return CarroDTO.create(rep.save(carro));
     }
 
     public Carro update(Carro carro, Long id) {
@@ -44,8 +46,7 @@ public class CarroService {
     }
 
     public void delete(Long id) {
-        Optional<Carro> op = rep.findById(id);
-        if(op.isPresent()){
+        if(getCarrosById(id).isPresent()){
         rep.deleteById(id);
         }
     }

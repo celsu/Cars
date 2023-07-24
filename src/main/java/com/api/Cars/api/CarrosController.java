@@ -22,9 +22,8 @@ public class CarrosController {
 
     @GetMapping("/{id}")
     public ResponseEntity getCarros(@PathVariable("id") Long id){
-        Optional<Carro> ca = service.getCarrosById(id);
-        return ca
-                .map(ResponseEntity::ok)
+        Optional<CarroDTO> ca = service.getCarrosById(id);
+        return ca.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -38,9 +37,13 @@ public class CarrosController {
     }
 
     @PostMapping
-    public String postCarro(@RequestBody Carro carro){
-        Carro c = service.save(carro);
-        return "carro add com sucesso: "+c.getNome()+" - "+c.getTipo();
+    public ResponseEntity postCarro(@RequestBody Carro carro){
+        try {
+            CarroDTO c = service.save(carro);
+            return ResponseEntity.created(null).build();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/{id}")
@@ -51,7 +54,7 @@ public class CarrosController {
 
     @DeleteMapping("/{id}")
     public String deleteCarro(@PathVariable("id") Long id){
-         service.delete(id);
+        service.delete(id);
         return "carro deletado com sucesso";
     }
 }
