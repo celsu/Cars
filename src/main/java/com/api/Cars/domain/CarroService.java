@@ -6,22 +6,24 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CarroService {
 
     @Autowired
     private CarroRepository rep;
-    public List<Carro> getCarros() {
-        return rep.findAll();
+    public List<CarroDTO> getCarros() {
+        //Recupera a Lista de carros, e criar carrosDTO, convertendo a lista para DTO
+        return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
     }
 
     public  Optional<Carro> getCarrosById(Long id) {
         Optional<Carro> op = rep.findById(id);
         return op;
     }
-    public List<Carro> getCarrosByTipo(String tipo) {
-        return rep.findByTipo(tipo);
+    public List<CarroDTO> getCarrosByTipo(String tipo) {
+        return rep.findByTipo(tipo).stream().map(CarroDTO::new).collect(Collectors.toList());
     }
 
     public Carro save(Carro carro) {
