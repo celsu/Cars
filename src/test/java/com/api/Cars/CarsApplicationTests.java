@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Optional;
 
 import static junit.framework.TestCase.*;
@@ -45,6 +46,12 @@ class CarsApplicationTests {
 
 		//Verificar se deletou
 		assertFalse(service.getCarrosById(id).isPresent());
+	}
+
+	void listaCarros() {
+
+		List<CarroDTO> ca = service.getCarros();
+
 	}
 
 }
