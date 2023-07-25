@@ -61,8 +61,9 @@ public class CarrosController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCarro(@PathVariable("id") Long id){
+    public ResponseEntity deleteCarro(@PathVariable("id") Long id){
         service.delete(id);
-        return "carro deletado com sucesso";
+        return ResponseEntity.ok().build();
+        //Na classe ExceptionConfig tem mapeado a excessao caso nao ache o ID (EmptyResultDataAccessException)
     }
 }

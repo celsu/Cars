@@ -1,6 +1,7 @@
 package com.api.Cars.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -46,8 +47,7 @@ public class CarroService {
     }
 
     public void delete(Long id) {
-        if(getCarrosById(id).isPresent()){
         rep.deleteById(id);
-        }
+
     }
 }
