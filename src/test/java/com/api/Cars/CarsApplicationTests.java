@@ -47,11 +47,4 @@ class CarsApplicationTests {
 		//Verificar se deletou
 		assertFalse(service.getCarrosById(id).isPresent());
 	}
-
-	void listaCarros() {
-
-		List<CarroDTO> ca = service.getCarros();
-
-	}
-
 }
